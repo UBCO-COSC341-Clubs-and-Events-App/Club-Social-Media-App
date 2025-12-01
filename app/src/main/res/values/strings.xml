@@ -3,4 +3,16 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- Authentication -->
+    <string name="login_title">Login</string>
+    <string name="signup_title">Sign Up</string>
+    <string name="no_account">Don't have an account</string>
+    <string name="option"><u><font color="#0000FF">sign up?</font></u></string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="forgot_password"><u><font color="#0000FF">Forgot password?</font></u></string>
+
+    <string name="btn_1_login">Login as Student</string>
+    <string name="btn_2_login">Login as Club</string>
 </resources>
