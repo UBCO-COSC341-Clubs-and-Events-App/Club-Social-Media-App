@@ -7,7 +7,7 @@
     <!-- Authentication -->
     <string name="login_title">Login</string>
     <string name="signup_title">Sign Up</string>
-    <string name="no_account">Don't have an account</string>
+    <string name="no_account">Don\'t have an account</string>
     <string name="option"><u><font color="#0000FF">sign up?</font></u></string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
