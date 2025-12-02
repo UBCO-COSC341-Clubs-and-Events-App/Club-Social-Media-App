@@ -8,11 +8,23 @@
     <string name="login_title">Login</string>
     <string name="signup_title">Sign Up</string>
     <string name="no_account">Don\'t have an account</string>
-    <string name="option"><u><font color="#0000FF">sign up?</font></u></string>
+    <string name="yes_account">Already have an account</string>
+    <string name="option_signup"><u><font color="#0000FF">sign up?</font></u></string>
+    <string name="option_login"><u><font color="#0000FF">log in?</font></u></string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
     <string name="forgot_password"><u><font color="#0000FF">Forgot password?</font></u></string>
 
     <string name="btn_1_login">Login as Student</string>
     <string name="btn_2_login">Login as Club</string>
+
+    <string name="btn_1_signup">Sign up as Student</string>
+    <string name="btn_2_signup">Sign up as Club</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Navigation -->
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
 </resources>
