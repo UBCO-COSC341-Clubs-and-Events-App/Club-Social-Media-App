@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_club"
+    app:startDestination="@id/postsFragment">
+
+    <fragment
+        android:id="@+id/postsFragment"
+        android:name="com.example.myapplication.ui.Posts.PostsFragment"
+        android:label="fragment_posts"
+        tools:layout="@layout/fragment_posts" />
+    <fragment
+        android:id="@+id/eventsClubFragment"
+        android:name="com.example.myapplication.ui.EventsClub.EventsClubFragment"
+        android:label="fragment_events_club"
+        tools:layout="@layout/fragment_events_club" />
+    <fragment
+        android:id="@+id/ticketSalesFragment"
+        android:name="com.example.myapplication.ui.TicketSales.TicketSalesFragment"
+        android:label="fragment_ticket_sales"
+        tools:layout="@layout/fragment_ticket_sales" />
+    <fragment
+        android:id="@+id/clubPageFragment"
+        android:name="com.example.myapplication.ui.ClubPage.ClubPageFragment"
+        android:label="fragment_club_page"
+        tools:layout="@layout/fragment_club_page" />
+</navigation>

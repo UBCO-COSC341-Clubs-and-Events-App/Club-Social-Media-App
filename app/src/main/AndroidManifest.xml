@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".Authentication"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Authentication"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>

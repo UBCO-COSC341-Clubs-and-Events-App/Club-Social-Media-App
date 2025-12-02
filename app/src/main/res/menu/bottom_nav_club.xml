@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/postsFragment"
+        android:icon="@drawable/ic_baseline_upload_24"
+        android:title="Posts" />
+
+    <item
+        android:id="@+id/eventsClubFragment"
+        android:icon="@drawable/ic_baseline_subscriptions_24"
+        android:title="Events" />
+
+    <item
+        android:id="@+id/ticketSalesFragment"
+        android:icon="@drawable/ic_baseline_video_library_24"
+        android:title="Ticket Sales" />
+
+    <item
+        android:id="@+id/clubPageFragment"
+        android:icon="@drawable/ic_baseline_vibration_24"
+        android:title="Club Page" />
+
+</menu>

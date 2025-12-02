@@ -5,13 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="1dp"
     tools:context=".Authentication">
 
     <LinearLayout
-        android:layout_width="324dp"
-        android:layout_height="333dp"
+        android:layout_width="341dp"
+        android:layout_height="426dp"
         android:background="@drawable/border"
-        android:gravity="center"
+        android:gravity="top"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,8 +21,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.497">
 
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            app:srcCompat="@drawable/suologo" />
+
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/auth_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_title"
@@ -36,25 +43,32 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="wrap_content"
+                android:layout_width="19dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="81dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/option_text"
+                android:layout_width="68dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:autoSizeTextType="uniform"
+                android:includeFontPadding="false"
+                android:padding="1sp"
                 android:text="@string/no_account"
                 android:textAlignment="center"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="2dp"
+                android:id="@+id/option"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/option" />
+                android:includeFontPadding="false"
+                android:onClick="onOptionClick"
+                android:padding="0dp"
+                android:paddingLeft="2dp"
+                android:text="@string/option_signup"
+                android:textStyle="bold" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -79,6 +93,33 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/hint_email"
+                android:inputType="textEmailAddress" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearCP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/user_confirm_password"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_confirm_password"
                 android:inputType="textEmailAddress" />
 
             <Space
@@ -124,7 +165,7 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/forgot_password_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -148,12 +189,13 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/student_user"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:layout_weight="1"
                 android:background="@drawable/border"
                 android:backgroundTint="@color/cardview_shadow_end_color"
+                android:onClick="onloginUser"
                 android:text="@string/btn_1_login"
                 android:textColor="@color/black"
                 android:textSize="10sp"
@@ -165,11 +207,12 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/club_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_blue_dark"
+                android:onClick="onLoginClub"
                 android:text="@string/btn_2_login"
                 android:textSize="10sp" />
 
