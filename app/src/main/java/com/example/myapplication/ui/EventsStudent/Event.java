@@ -5,7 +5,7 @@ public class Event {
     private String duration;
     private String title;
     private String location;
-    private long date; // Date of the event in milliseconds
+    private long date;
 
     public Event(String time, String duration, String title, String location, long date) {
         this.time = time;

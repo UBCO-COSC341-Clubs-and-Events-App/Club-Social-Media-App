@@ -15,7 +15,6 @@ public class EventsStudentViewModel extends ViewModel {
     private final List<Event> allEvents = new ArrayList<>();
 
     public EventsStudentViewModel() {
-        // Initialize the list of events with today's date
         Calendar today = Calendar.getInstance();
 
         // Add events for today

@@ -62,8 +62,6 @@ public class EventsStudentFragment extends Fragment {
     private void updateDateViews(long selectedDate) {
         Date date = new Date(selectedDate);
         SimpleDateFormat monthFormat = new SimpleDateFormat("MMM", Locale.getDefault());
-        //binding.monthTextView.setText(monthFormat.format(date));
-
         SimpleDateFormat todayFormat = new SimpleDateFormat("'Today' - EEE MMM dd", Locale.getDefault());
         binding.todayTextView.setText(todayFormat.format(date));
     }
