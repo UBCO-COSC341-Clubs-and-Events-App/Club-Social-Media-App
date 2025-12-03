@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.EventsStudent;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,15 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private List<Event> events;
+    private OnFeedbackButtonClickListener listener;
 
-    public EventAdapter(List<Event> events) {
+    public interface OnFeedbackButtonClickListener {
+        void onFeedbackButtonClick(Event event);
+    }
+
+    public EventAdapter(List<Event> events, OnFeedbackButtonClickListener listener) {
         this.events = events;
+        this.listener = listener;
     }
 
     @NonNull
@@ -28,7 +35,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = events.get(position);
-        holder.bind(event);
+        holder.bind(event, listener);
     }
 
     @Override
@@ -49,11 +56,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             this.binding = binding;
         }
 
-        public void bind(Event event) {
+        public void bind(Event event, OnFeedbackButtonClickListener listener) {
             binding.eventTimeTextView.setText(event.getTime());
             binding.eventDurationTextView.setText(event.getDuration());
             binding.eventTitleTextView.setText(event.getTitle());
             binding.eventLocationTextView.setText(event.getLocation());
+            binding.feedbackButton.setOnClickListener(v -> listener.onFeedbackButtonClick(event));
         }
     }
 }
