@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private AppBarConfiguration appBarConfiguration;
     private boolean isUser;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        searchView = findViewById(R.id.searchView);
 
         setSupportActionBar(toolbar);
 
@@ -70,6 +73,16 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(item -> handleDrawerSelection(item, navController));
         fab.setOnClickListener(view -> showBottomDialog());
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     private boolean handleDrawerSelection(@NonNull MenuItem item, @NonNull NavController navController) {

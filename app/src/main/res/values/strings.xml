@@ -15,6 +15,12 @@
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm password</string>
     <string name="forgot_password"><u><font color="#0000FF">Forgot password?</font></u></string>
+    <string name="err0">Please enter a valid email address</string>
+    <string name="err1">Please enter a valid password</string>
+    <string name="err2">Please enter a longer Password</string>
+    <string name="hint_username">username</string>
+    <string name="err3">Passwords do not match</string>
+
 
     <string name="btn_1_login">Login as Student</string>
     <string name="btn_2_login">Login as Club</string>

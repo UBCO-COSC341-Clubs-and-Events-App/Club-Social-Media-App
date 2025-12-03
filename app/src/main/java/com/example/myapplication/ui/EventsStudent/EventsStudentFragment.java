@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.EventsStudent;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,9 @@ public class EventsStudentFragment extends Fragment {
     private FragmentEventsStudentBinding binding;
     private EventAdapter eventAdapter;
     private EventsStudentViewModel eventsStudentViewModel;
+
+    // Store which mood is selected
+    private String selectedMood = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
