@@ -33,7 +33,4 @@
     <!-- Navigation -->
     <string name="open_nav">Open Navigation Drawer</string>
     <string name="close_nav">Close Navigation Drawer</string>
-    <string name="previous_month">Previous Month</string>
-    <string name="next_month">Next Month</string>
-    <string name="add_event">Add Event</string>
 </resources>
