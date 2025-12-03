@@ -19,11 +19,11 @@
             android:id="@+id/date_container"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/text_month"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                tools:text="NOV"/>
+                tools:text="NOV" />
 
             <TextView
                 android:id="@+id/text_day"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                tools:text="03"/>
+                tools:text="03" />
         </LinearLayout>
 
         <TextView
@@ -47,10 +47,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_event"
             app:layout_constraintStart_toEndOf="@id/date_container"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_event"
-            tools:text="Mon 5:00 p.m."/>
+            tools:text="Mon 5:00 p.m." />
 
         <TextView
             android:id="@+id/text_event_name"
@@ -58,13 +58,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
-            android:textSize="18sp"
             android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_event"
             app:layout_constraintStart_toEndOf="@id/date_container"
             app:layout_constraintTop_toBottomOf="@id/text_event_time"
-            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_event"
-            tools:text="VerTech Gala"/>
+            tools:text="VerTech Gala" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cancel_event"
@@ -72,12 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
+            android:textColor="?attr/colorError"
             app:icon="@drawable/ic_delete"
             app:iconTint="?attr/colorError"
-            android:textColor="?attr/colorError"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
