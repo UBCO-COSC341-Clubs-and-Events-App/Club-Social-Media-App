@@ -11,7 +11,7 @@
         android:layout_width="43dp"
         android:layout_height="33dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="28dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/add_event"
         android:src="@drawable/ic_add"
