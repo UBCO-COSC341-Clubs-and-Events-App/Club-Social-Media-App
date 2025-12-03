@@ -91,4 +91,16 @@
         app:layout_constraintStart_toEndOf="@id/faces_layout"
         android:layout_marginStart="8dp"/>
 
+    <Button
+        android:id="@+id/feedback_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/more_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/more_text_view"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="?android:attr/textColorPrimary"
+        android:layout_marginStart="16dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

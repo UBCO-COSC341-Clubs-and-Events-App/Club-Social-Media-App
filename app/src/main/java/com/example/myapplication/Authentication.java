@@ -157,7 +157,11 @@ public class Authentication extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if (user != null) {
                                     // The onStart() method will handle the redirect to MainActivity
-                                    startActivity(new Intent(Authentication.this, MainActivity.class));
+                                    Intent intent = new Intent(Authentication.this, MainActivity.class);
+                                    intent.putExtra("is_user", true);
+                                    intent.putExtra("email", user.getEmail());
+                                    intent.putExtra("uid", user.getUid());
+                                    startActivity(intent);
                                     finish(); // Finish this activity
                                 }
                             } else {
@@ -201,7 +205,11 @@ public class Authentication extends AppCompatActivity {
                                 progressBar.setVisibility(INVISIBLE);
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 // After sign-up, you should likely navigate to the main activity
-                                startActivity(new Intent(Authentication.this, MainActivity.class));
+                                Intent intent = new Intent(Authentication.this, MainActivity.class);
+                                intent.putExtra("is_user", false);
+                                intent.putExtra("email", user.getEmail());
+                                intent.putExtra("uid", user.getUid());
+                                startActivity(intent);
                                 finish(); // Finish current activity
                             } else {
                                 progressBar.setVisibility(INVISIBLE);
@@ -220,7 +228,11 @@ public class Authentication extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if(user != null){
                                     // onStart() handles redirect, so just start the activity
-                                    startActivity(new Intent(Authentication.this, MainActivity.class));
+                                    Intent intent = new Intent(Authentication.this, MainActivity.class);
+                                    intent.putExtra("is_user", false);
+                                    intent.putExtra("email", user.getEmail());
+                                    intent.putExtra("uid", user.getUid());
+                                    startActivity(intent);
                                     finish(); // Finish current activity
                                 }
                             } else {
