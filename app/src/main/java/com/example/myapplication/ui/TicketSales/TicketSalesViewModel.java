@@ -10,7 +10,7 @@ public class TicketSalesViewModel extends ViewModel {
 
     public TicketSalesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Sales by Day");
+        mText.setValue("This is notifications fragment");
     }
 
     public LiveData<String> getText() {
