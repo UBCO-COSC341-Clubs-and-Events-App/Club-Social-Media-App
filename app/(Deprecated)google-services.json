@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "658618390818",
+    "project_id": "club-social-media-app",
+    "storage_bucket": "club-social-media-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658618390818:android:3db918a7cfc6a049102d7b",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDayrCwcFOeiR4JGJBXIggk7V3lx-fj2Qo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
