@@ -6,119 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".ui.EventsStudent.EventsStudentFragment">
 
+    <ImageButton
+        android:id="@+id/add_event_button"
+        android:layout_width="43dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/add_event"
+        android:src="@drawable/ic_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CalendarView
+        android:id="@+id/calendar_view"
+        android:layout_width="408dp"
+        android:layout_height="311dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_event_button" />
+
     <TextView
-        android:id="@+id/text_events_student"
-        android:layout_width="match_parent"
+        android:id="@+id/today_text_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:text="Today - Thu Apr 13"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@id/calendar_view"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/events_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/today_text_view"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/feedbackTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:text="How was the event?"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/emojiLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/feedbackTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp">
-
-        <TextView
-            android:id="@+id/emojiSad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="😞"
-            android:textSize="35sp" />
-
-        <TextView
-            android:id="@+id/emojiNeutral"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="😐"
-            android:textSize="35sp" />
-
-        <TextView
-            android:id="@+id/emojiHappy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🙂"
-            android:textSize="35sp"
-            android:padding="12dp" />
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/feedbackBox"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:drawable/edit_text"
-        android:gravity="top|start"
-        android:hint="What did you like or dislike?"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emojiLayout" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="28dp"
-        android:numStars="5"
-        android:stepSize="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/feedbackBox" />
-
-    <Button
-        android:id="@+id/discardBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#C62828"
-        android:text="Discard"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toStartOf="@+id/submitBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ratingBar" />
-
-    <Button
-        android:id="@+id/submitBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="#2E7D32"
-        android:text="Submit"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/discardBtn"
-        app:layout_constraintTop_toBottomOf="@id/ratingBar" />
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/item_event"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
