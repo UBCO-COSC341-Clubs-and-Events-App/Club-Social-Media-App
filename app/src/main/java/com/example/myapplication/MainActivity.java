@@ -88,11 +88,11 @@ public class MainActivity extends AppCompatActivity {
         resultView.setVisibility(View.GONE);
 
         allResults = java.util.Arrays.asList(
-                "ClubName1's Event",
-                "ClubName2's Event",
-                "ClubName3's Event",
-                "ClubName4's Event",
-                "ClubName5's Event"
+                "Sample Event 123",
+                "Sample Event 456",
+                "Sample Event 789",
+                "Sample Event 147",
+                "Sample Event 569"
         );
 
         filteredResults = new java.util.ArrayList<>();
