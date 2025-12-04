@@ -18,10 +18,28 @@
         android:id="@+id/ticketsFragment"
         android:name="com.example.myapplication.ui.Tickets.TicketsFragment"
         android:label="fragment_tickets"
-        tools:layout="@layout/fragment_tickets" />
+        tools:layout="@layout/fragment_tickets" >
+        <action
+            android:id="@+id/action_ticketsFragment_to_ticketDetailsFragment"
+            app:destination="@id/ticketDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.myapplication.ui.Profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/ticketDetailsFragment"
+        android:name="com.example.myapplication.ui.Tickets.TicketDetailsFragment"
+        android:label="fragment_ticket_details"
+        tools:layout="@layout/fragment_ticket_details" >
+        <action
+            android:id="@+id/action_ticketDetailsFragment_to_ticketReceiptFragment"
+            app:destination="@id/ticketReceiptFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketReceiptFragment"
+        android:name="com.example.myapplication.ui.Tickets.TicketReceiptFragment"
+        android:label="fragment_ticket_receipt"
+        tools:layout="@layout/fragment_ticket_receipt" />
 </navigation>
