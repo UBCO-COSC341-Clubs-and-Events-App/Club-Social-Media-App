@@ -64,7 +64,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             binding.eventLocationTextView.setText(event.getLocation());
             binding.feedbackButton.setOnClickListener(v -> listener.onFeedbackButtonClick(event));
 
-            // Get today's date, but without the time part
+            // Get today's date
             Calendar today = Calendar.getInstance();
             today.set(Calendar.HOUR_OF_DAY, 0);
             today.set(Calendar.MINUTE, 0);
