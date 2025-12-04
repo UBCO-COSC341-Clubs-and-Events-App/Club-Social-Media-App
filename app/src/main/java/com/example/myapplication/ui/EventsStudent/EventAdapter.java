@@ -11,6 +11,7 @@ import com.example.myapplication.databinding.ItemEventBinding;
 
 import java.util.List;
 
+
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private List<Event> events;
