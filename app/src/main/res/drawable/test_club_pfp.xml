@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Layer 1: The background shape (a black rounded square) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/lavender"/>
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>
+
+    <!-- Layer 2: The foreground vector icon -->
+    <!-- You can add gravity or padding here to position the icon -->
+    <item
+        android:drawable="@drawable/ic_person"
+        android:gravity="center" />
+
+</layer-list>

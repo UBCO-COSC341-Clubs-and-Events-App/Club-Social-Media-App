@@ -95,11 +95,11 @@ public class FeedFragment extends Fragment {
 
     private void setupAllPostsList() {
         if (allPosts.isEmpty()) {
-            allPosts.add(new FeedItem(R.drawable.ic_launcher_foreground, "ClubName1", lorumIpsum(0), R.drawable.ic_launcher_background));
-            allPosts.add(new FeedItem(R.drawable.ic_launcher_foreground, "ClubName2", lorumIpsum(1), R.drawable.ic_launcher_background));
-            allPosts.add(new FeedItem(R.drawable.ic_launcher_foreground, "ClubName3", lorumIpsum(2), R.drawable.ic_launcher_background));
-            allPosts.add(new FeedItem(R.drawable.ic_launcher_foreground, "ClubName4", lorumIpsum(3), R.drawable.ic_launcher_background));
-            allPosts.add(new FeedItem(R.drawable.ic_launcher_foreground, "ClubName5", lorumIpsum(4), R.drawable.ic_launcher_background));
+            allPosts.add(new FeedItem(R.drawable.test_club_pfp, "ClubName1", lorumIpsum(0), R.drawable.ic_launcher_background));
+            allPosts.add(new FeedItem(R.drawable.test_club_pfp, "ClubName2", lorumIpsum(1), R.drawable.ic_launcher_background));
+            allPosts.add(new FeedItem(R.drawable.test_club_pfp, "ClubName3", lorumIpsum(2), R.drawable.ic_launcher_background));
+            allPosts.add(new FeedItem(R.drawable.test_club_pfp, "ClubName4", lorumIpsum(3), R.drawable.ic_launcher_background));
+            allPosts.add(new FeedItem(R.drawable.test_club_pfp, "ClubName5", lorumIpsum(4), R.drawable.ic_launcher_background));
         }
     }
 
