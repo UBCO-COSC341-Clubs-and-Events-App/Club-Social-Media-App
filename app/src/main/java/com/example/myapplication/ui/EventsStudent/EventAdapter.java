@@ -71,7 +71,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             today.set(Calendar.SECOND, 0);
             today.set(Calendar.MILLISECOND, 0);
 
-            // Check if the event's date is before today
+            // Check if the event's date is before today's date
             if (event.getDate() < today.getTimeInMillis()) {
                 binding.feedbackButton.setVisibility(View.VISIBLE);
             } else {
