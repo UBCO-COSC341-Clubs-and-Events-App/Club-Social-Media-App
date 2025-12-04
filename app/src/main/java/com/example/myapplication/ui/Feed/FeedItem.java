@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.Feed;
 
+import java.util.Date;
+
 public class FeedItem {
 
     private static int latestId = 0;
@@ -8,13 +10,14 @@ public class FeedItem {
     private String clubName;
     private String description;
     private int postImage;
-    //boolean isLiked = false;
+    private String eventDate;
 
-    public FeedItem(int clubImage, String clubName, String description, int postImage) {
+    public FeedItem(int clubImage, String clubName, String description, int postImage, String eventDate) {
         this.clubImage = clubImage;
         this.clubName = clubName;
         this.description = description;
         this.postImage = postImage;
+        this.eventDate = eventDate;
     }
 
     public int getClubImage() {
@@ -59,5 +62,13 @@ public class FeedItem {
 
     public int getPostId(){
         return postId;
+    }
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
     }
 }

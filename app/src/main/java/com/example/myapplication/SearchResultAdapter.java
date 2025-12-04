@@ -11,17 +11,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+// Import the Event class
+import com.example.myapplication.ui.EventsClub.Event;
+
 import java.util.List;
 
-public class SearchResultAdapter extends ArrayAdapter<String> {
+// FIX 1: Change the adapter's generic type from <String> to <Event>
+public class SearchResultAdapter extends ArrayAdapter<Event> {
 
-    private final LayoutInflater inflater;
+    // The inflater is no longer needed as a member variable since we can get it from context
+    // private final LayoutInflater inflater;
 
-    public SearchResultAdapter(@NonNull Context context, @NonNull List<String> objects) {
+    // FIX 2: Update the constructor to accept a List of Event objects
+    public SearchResultAdapter(@NonNull Context context, @NonNull List<Event> objects) {
         super(context, 0, objects);
-        inflater = LayoutInflater.from(context);
+        // inflater = LayoutInflater.from(context); // This is not strictly necessary
     }
 
+    // The ViewHolder remains useful for performance
     static class ViewHolder {
         ImageView icon;
         TextView title;
@@ -34,6 +41,7 @@ public class SearchResultAdapter extends ArrayAdapter<String> {
         ViewHolder holder;
 
         if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.search_result_item, parent, false);
             holder = new ViewHolder();
             holder.icon = convertView.findViewById(R.id.icon);
@@ -44,16 +52,14 @@ public class SearchResultAdapter extends ArrayAdapter<String> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        String item = getItem(position);
-        if (item != null) {
-            // main text
-            holder.title.setText(item);
+        Event event = getItem(position);
 
-            // simple example subtitle – you can customize this
-            holder.subtitle.setText("Tap to view details");
+        if (event != null) {
+            holder.title.setText(event.getName());
 
-            // optional: change icon depending on content
-            // if (item.contains("ClubName1")) { ... }
+            holder.subtitle.setText(event.getName());
+
+            holder.icon.setImageResource(R.drawable.test_club_pfp); // Make sure you have an 'ic_event' drawable
         }
 
         return convertView;
