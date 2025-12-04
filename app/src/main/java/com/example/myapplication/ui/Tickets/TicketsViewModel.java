@@ -10,27 +10,17 @@ import java.util.List;
 public class TicketsViewModel extends ViewModel {
     private final MutableLiveData<List<Ticket>> tickets = new MutableLiveData<>();
 
-    public LiveData<List<Ticket>> getTickets() {
-        return tickets;
+    private final MutableLiveData<List<Event>> events;
+
+    public TicketsViewModel() {
+        events = new MutableLiveData<>();
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(new Event("NOV", "03", "VerTech Gala", "Mon 5:00 p.m.", false));
+        eventList.add(new Event("NOV", "15", "c2 Hacks", "Sat 5:00 p.m.", true));
+        events.setValue(eventList);
     }
 
-    public void loadTickets() {
-        List<Ticket> ticketList = new ArrayList<>();
-        ticketList.add(new Ticket("NOV", "03", "Mon 5:00 p.m.", "VerTech Gala", true));
-        ticketList.add(new Ticket("NOV", "15", "Sat 5:00 p.m.", "c2 Hacks", false));
-        tickets.setValue(ticketList);
-    }
-
-    public void markTicketAsBooked(String ticketId) {
-        List<Ticket> currentTickets = tickets.getValue();
-        if (currentTickets != null) {
-            for (Ticket ticket : currentTickets) {
-                if (ticket.getId().equals(ticketId)) {
-                    ticket.setBooked(true);
-                    break;
-                }
-            }
-            tickets.setValue(new ArrayList<>(currentTickets)); // Trigger update
-        }
+    public LiveData<List<Event>> getEvents() {
+        return events;
     }
 }

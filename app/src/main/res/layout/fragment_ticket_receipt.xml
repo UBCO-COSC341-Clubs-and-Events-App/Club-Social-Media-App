@@ -1,100 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".ui.Tickets.TicketReceiptFragment">
 
-    <TextView
-        android:id="@+id/tv_receipt_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Receipt"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#F5F5F5"
+        app:navigationIcon="@drawable/ic_menu_24"
+        app:menu="@menu/details_menu">
 
-    <TextView
-        android:id="@+id/tv_tickets_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Tickets:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_receipt_title" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receipt"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_receipt_tickets"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tickets_label"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_ticket_receipt" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
-    <TextView
-        android:id="@+id/tv_payment_used_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Payment Used:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_receipt_tickets" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_payment_used"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_payment_used_label"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_total_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Total (including tax):"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_payment_used_label" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tickets:"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/tv_total_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_total_label"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ticket_receipts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_ticket_type_receipt"
+                tools:itemCount="2"/>
 
-    <Button
-        android:id="@+id/btn_leave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:text="Leave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_amount" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="16dp"/>
 
-    <Button
-        android:id="@+id/btn_purchase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:text="Purchase"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_leave" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Payment Used:"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/payment_method_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apple Pay"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Total (including tax):"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/total_price_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$1.99"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/leave_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:text="Leave"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#D32F2F"/>
+
+            <Button
+                android:id="@+id/tickets_club_page_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:text="Tickets Club Page"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#2196F3"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

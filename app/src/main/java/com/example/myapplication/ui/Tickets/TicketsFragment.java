@@ -4,32 +4,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentTicketsBinding;
+import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketsFragment extends Fragment implements TicketAdapter.OnItemClickListener {
-
     private FragmentTicketsBinding binding;
-    private TicketAdapter adapter;
-    private List<Ticket> tickets;
     private TicketsViewModel ticketsViewModel;
+    private EventAdapter eventAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentTicketsBinding.inflate(inflater, container, false);
-        ticketsViewModel = new ViewModelProvider(requireActivity()).get(TicketsViewModel.class);
         return binding.getRoot();
     }
 
@@ -37,43 +30,29 @@ public class TicketsFragment extends Fragment implements TicketAdapter.OnItemCli
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Initialize ViewModel
+        ticketsViewModel = new ViewModelProvider(this).get(TicketsViewModel.class);
+
+        // Setup RecyclerView
         setupRecyclerView();
 
-        ticketsViewModel.getTickets().observe(getViewLifecycleOwner(), updatedTickets -> {
-            tickets.clear();
-            tickets.addAll(updatedTickets);
-            adapter.notifyDataSetChanged();
-        });
-
-        getParentFragmentManager().setFragmentResultListener("purchase_completed", this, (requestKey, bundle) -> {
-            String ticketId = bundle.getString("ticketId");
-            if (ticketId != null) {
-                ticketsViewModel.markTicketAsBooked(ticketId);
+        // Observe data from ViewModel
+        ticketsViewModel.getEvents().observe(getViewLifecycleOwner(), events -> {
+            if (events != null) {
+                eventAdapter.setEvents(events);
             }
         });
     }
 
     private void setupRecyclerView() {
-        tickets = new ArrayList<>();
-        if (ticketsViewModel.getTickets().getValue() == null) {
-            ticketsViewModel.loadTickets();
-        }
-        binding.ticketsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new TicketAdapter(tickets, this);
-        binding.ticketsRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onItemClick(Ticket ticket) {
-        Bundle bundle = new Bundle();
-        bundle.putString("ticketId", ticket.getId());
-        NavHostFragment.findNavController(this)
-                .navigate(R.id.action_ticketsFragment_to_ticketDetailsFragment, bundle);
+        binding.recyclerEvents.setLayoutManager(new LinearLayoutManager(getContext()));
+        eventAdapter = new EventAdapter(new ArrayList<>());
+        binding.recyclerEvents.setAdapter(eventAdapter);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        binding = null; // Avoid memory leaks
     }
 }

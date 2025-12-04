@@ -4,30 +4,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentTicketReceiptBinding;
-
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TicketReceiptFragment extends Fragment {
 
     private FragmentTicketReceiptBinding binding;
-    private String ticketId;
+    private static final double TAX_RATE = 0.05; // 5% tax
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentTicketReceiptBinding.inflate(inflater, container, false);
-        if (getArguments() != null) {
-            ticketId = getArguments().getString("ticketId");
-        }
         return binding.getRoot();
     }
 
@@ -35,29 +29,29 @@ public class TicketReceiptFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            double totalWithTax = arguments.getDouble("totalWithTax");
-            String paymentMethod = arguments.getString("paymentMethod");
-            ArrayList<TicketType> purchasedTickets = arguments.getParcelableArrayList("purchasedTickets");
+        // You would pass the list of tickets to this fragment, e.g., through arguments
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(new Ticket("VerTech Gala Normal", 0.00, 1));
+        tickets.add(new Ticket("VerTech Gala Premium", 1.99, 1));
 
-            binding.tvTotalAmount.setText(String.format(java.util.Locale.US, "$%.2f", totalWithTax));
-            binding.tvPaymentUsed.setText(paymentMethod);
+        setupRecyclerView(tickets);
+        calculateAndDisplayTotal(tickets);
+    }
 
-            binding.rvReceiptTickets.setLayoutManager(new LinearLayoutManager(getContext()));
-            binding.rvReceiptTickets.setAdapter(new TicketReceiptAdapter(purchasedTickets));
+    private void setupRecyclerView(List<Ticket> tickets) {
+        binding.rvTicketReceipts.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvTicketReceipts.setAdapter(new TicketReceiptAdapter(tickets));
+    }
+
+    private void calculateAndDisplayTotal(List<Ticket> tickets) {
+        double subtotal = 0.0;
+        for (Ticket ticket : tickets) {
+            subtotal += ticket.getPrice() * ticket.getQuantity();
         }
+        double tax = subtotal * TAX_RATE;
+        double total = subtotal + tax;
 
-        binding.btnLeave.setOnClickListener(v ->
-                NavHostFragment.findNavController(this).navigate(R.id.action_ticketReceiptFragment_to_nav_tickets)
-        );
-
-        binding.btnPurchase.setOnClickListener(v -> {
-            Bundle result = new Bundle();
-            result.putString("ticketId", ticketId);
-            getParentFragmentManager().setFragmentResult("purchase_completed", result);
-            NavHostFragment.findNavController(this).navigate(R.id.action_ticketReceiptFragment_to_nav_tickets);
-        });
+        binding.totalPriceTextView.setText(NumberFormat.getCurrencyInstance().format(total));
     }
 
     @Override

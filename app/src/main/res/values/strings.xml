@@ -37,17 +37,22 @@
     <string name="next_month">Next Month</string>
     <string name="add_event">Add Event</string>
 
-    <!-- Ticket Details -->
+    <!-- Tickets Screen -->
+    <string name="tickets_title">Coding Club SUO Tickets</string>
+    <string name="ticket_header_image_description">Header image for the tickets screen</string>
+    <string name="event_sections_description">Tabs for event sections</string>
+    <string name="tickets_label">Tickets</string>
+    <string name="tickets_tab">Tickets</string>
+    <string name="about_tab">About</string>
+    <string name="faq_tab">FAQ</string>
+
+    <!-- Ticket Details Screen -->
     <string name="details_label">Details</string>
-    <string name="details_body_text">This is a placeholder for the event details.</string>
-    <string name="past_event_ratings">Past Event Ratings</string>
+    <string name="details_body_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="past_event_ratings">Past Event Ratings: 4.0</string>
     <string name="ticket_types_title">Ticket Types</string>
-    <string name="choose_payment_type">Choose Payment Type</string>
-    <string name="total_including_tax">Total (including tax)</string>
-    <string name="total_price">$0.00</string>
+    <string name="choose_payment_type">Choose payment type</string>
+    <string name="total_including_tax">Total (including tax):</string>
+    <string name="total_price">$1.99</string>
     <string name="get_tickets_button">Get Tickets</string>
-
-    <!-- Tickets Fragment -->
-    <string name="club_header_image">Club Header Image</string>
-
 </resources>

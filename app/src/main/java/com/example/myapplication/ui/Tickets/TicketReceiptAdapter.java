@@ -4,48 +4,44 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.myapplication.databinding.ItemTicketReceiptBinding;
+import com.example.myapplication.databinding.ItemTicketTypeReceiptBinding;
+import java.text.NumberFormat;
 import java.util.List;
 
-public class TicketReceiptAdapter extends RecyclerView.Adapter<TicketReceiptAdapter.TicketReceiptViewHolder> {
+public class TicketReceiptAdapter extends RecyclerView.Adapter<TicketReceiptAdapter.ViewHolder> {
 
-    private final List<TicketType> ticketTypes;
+    private final List<Ticket> tickets;
 
-    public TicketReceiptAdapter(List<TicketType> ticketTypes) {
-        this.ticketTypes = ticketTypes;
+    public TicketReceiptAdapter(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     @NonNull
     @Override
-    public TicketReceiptViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ItemTicketReceiptBinding binding = ItemTicketReceiptBinding.inflate(inflater, parent, false);
-        return new TicketReceiptViewHolder(binding);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemTicketTypeReceiptBinding binding = ItemTicketTypeReceiptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TicketReceiptViewHolder holder, int position) {
-        TicketType ticketType = ticketTypes.get(position);
-        holder.bind(ticketType);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Ticket ticket = tickets.get(position);
+        holder.binding.ticketQuantityTextView.setText("x" + ticket.getQuantity());
+        holder.binding.ticketNameTextView.setText(ticket.getName());
+        holder.binding.ticketPriceTextView.setText(NumberFormat.getCurrencyInstance().format(ticket.getPrice()));
     }
 
     @Override
     public int getItemCount() {
-        return ticketTypes.size();
+        return tickets.size();
     }
 
-    static class TicketReceiptViewHolder extends RecyclerView.ViewHolder {
-        private final ItemTicketReceiptBinding binding;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ItemTicketTypeReceiptBinding binding;
 
-        public TicketReceiptViewHolder(ItemTicketReceiptBinding binding) {
+        public ViewHolder(ItemTicketTypeReceiptBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-        }
-
-        public void bind(TicketType ticketType) {
-            binding.tvQuantity.setText("x" + ticketType.getQuantity());
-            binding.tvTicketName.setText(ticketType.getName());
-            binding.tvTicketPrice.setText(String.format(java.util.Locale.US, "$%.2f", ticketType.getPrice()));
         }
     }
 }
