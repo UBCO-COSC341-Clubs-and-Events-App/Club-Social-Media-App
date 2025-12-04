@@ -1,30 +1,28 @@
 package com.example.myapplication.ui.EventsStudent;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Event {
-    private String time;
-    private String duration;
-    private String title;
+    private String name;
     private String location;
     private long date;
+    private String duration;
 
-    public Event(String time, String duration, String title, String location, long date) {
-        this.time = time;
-        this.duration = duration;
-        this.title = title;
+
+    public Event() {}
+
+    public Event(String name, String location, long date, String duration) {
+        this.name = name;
         this.location = location;
         this.date = date;
+        this.duration = duration;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public String getTitle() {
-        return title;
+    // Getters
+    public String getName() { // Changed from 'getTitle' to 'getName'
+        return name;
     }
 
     public String getLocation() {
@@ -33,5 +31,16 @@ public class Event {
 
     public long getDate() {
         return date;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+
+    public String getTime() {
+        if (date == 0) return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a", Locale.US);
+        return sdf.format(new Date(date));
     }
 }
