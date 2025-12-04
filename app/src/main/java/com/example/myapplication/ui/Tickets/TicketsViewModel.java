@@ -4,16 +4,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicketsViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<List<Event>> events;
 
     public TicketsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        events = new MutableLiveData<>();
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(new Event("NOV", "03", "VerTech Gala", "Mon 5:00 p.m.", false));
+        eventList.add(new Event("NOV", "15", "c2 Hacks", "Sat 5:00 p.m.", true));
+        events.setValue(eventList);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Event>> getEvents() {
+        return events;
     }
 }
