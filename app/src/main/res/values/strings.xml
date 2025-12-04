@@ -45,6 +45,8 @@
     <string name="tickets_tab">Tickets</string>
     <string name="about_tab">About</string>
     <string name="faq_tab">FAQ</string>
+    <string name="ticket_booked">Booked</string>
+    <string name="add_to_cart">Add to Cart</string>
 
     <!-- Ticket Details Screen -->
     <string name="details_label">Details</string>

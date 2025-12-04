@@ -27,10 +27,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.myapplication.ui.Tickets.Ticket;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Reset the tickets database on app start
+        resetAndInitializeTicketsDatabase();
 
         isUser = getIntent().getBooleanExtra("is_user", true);
 
@@ -135,6 +145,22 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void resetAndInitializeTicketsDatabase() {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        List<Ticket> mockTickets = new ArrayList<>();
+        mockTickets.add(new Ticket("1", "VerTech Gala Normal", 0.00, 1, "OCT", "24", "7:00 PM", "VerTech Gala", false));
+        mockTickets.add(new Ticket("2", "VerTech Gala Premium", 1.99, 1, "OCT", "24", "7:00 PM", "VerTech Gala", false));
+        mockTickets.add(new Ticket("3", "c2 Hacks", 5.00, 1, "NOV", "15", "5:00 PM", "c2 Hacks", false));
+
+        Map<String, Object> ticketMap = new HashMap<>();
+        for (Ticket ticket : mockTickets) {
+            ticketMap.put(ticket.getId(), ticket);
+        }
+
+        // Overwrite the entire "tickets" node with the fresh mock data
+        db.child("tickets").setValue(ticketMap);
     }
 
     //----------Search Bar Stuff----------
