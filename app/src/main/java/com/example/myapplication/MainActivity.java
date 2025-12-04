@@ -9,8 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private boolean isUser;
     private SearchView searchView;
+    private ListView resultView;
+    //private ArrayAdapter<String> searchAdapter;
+    private java.util.List<String> allResults;
+    private java.util.List<String> filteredResults;
+    private SearchResultAdapter searchAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         searchView = findViewById(R.id.searchView);
+        resultView = findViewById(R.id.searchResultsView);
+
 
         setSupportActionBar(toolbar);
 
@@ -71,17 +81,98 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
+        navigationView.setNavigationItemSelectedListener(item -> handleDrawerSelection(item, navController));
         fab.setOnClickListener(view -> showBottomDialog());
+
+        //----------Search Bar Stuff----------
+        resultView.setVisibility(View.GONE);
+
+        allResults = java.util.Arrays.asList(
+                "Sample Event 123",
+                "Sample Event 456",
+                "Sample Event 789",
+                "Sample Event 147",
+                "Sample Event 569"
+        );
+
+        filteredResults = new java.util.ArrayList<>();
+
+        searchAdapter = new SearchResultAdapter(
+                this,
+                filteredResults
+        );
+
+        resultView.setAdapter(searchAdapter);
+
+        resultView.setOnItemClickListener((parent, view, position, id) -> {
+            String selected = filteredResults.get(position);
+            Toast.makeText(MainActivity.this, "Clicked: " + selected, Toast.LENGTH_SHORT).show();
+
+            //Navigate to the event's page
+
+            searchView.setQuery("", false);
+            searchView.clearFocus();
+            hideSearchResults();
+        });
+
+        searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                showSearchResults();
+            } else {
+                hideSearchResults();
+            }
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                return true;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                filterResults(newText);
+                return true;
             }
         });
+    }
+
+    //----------Search Bar Stuff----------
+    private void showSearchResults() {
+        resultView.setVisibility(View.VISIBLE);
+        bottomNavigationView.setVisibility(View.GONE);
+        fab.setVisibility(View.GONE);
+    }
+
+    private void hideSearchResults() {
+        resultView.setVisibility(View.GONE);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.VISIBLE);
+    }
+
+    private void filterResults(String query) {
+        filteredResults.clear();
+
+        if (query != null) {
+            String lower = query.toLowerCase().trim();
+            if (!lower.isEmpty()) {
+                for (String item : allResults) {
+                    if (item.toLowerCase().contains(lower)) {
+                        filteredResults.add(item);
+                    }
+                }
+            }
+        }
+
+        searchAdapter.notifyDataSetChanged();
+    }
+
+    //----------Navigation Stuff----------
+    private boolean handleDrawerSelection(@NonNull MenuItem item, @NonNull NavController navController) {
+        Toast.makeText(this, item.getTitle() + " pressed", Toast.LENGTH_SHORT).show();
+        boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+        drawerLayout.closeDrawers();
+        return handled;
     }
 
     private void configureNavigation(@NonNull NavController navController) {
