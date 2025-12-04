@@ -45,7 +45,7 @@ public class TicketsFragment extends Fragment implements TicketAdapter.OnItemCli
             adapter.notifyDataSetChanged();
         });
 
-        getParentFragmentManager().setFragmentResultListener("purchase_completed", this, (requestKey, bundle) -> {
+        getParentFragmentManager().setFragmentResultListener("purchase_completed", getViewLifecycleOwner(), (requestKey, bundle) -> {
             String ticketId = bundle.getString("ticketId");
             if (ticketId != null) {
                 ticketsViewModel.markTicketAsBooked(ticketId);
