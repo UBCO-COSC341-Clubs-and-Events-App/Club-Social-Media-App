@@ -60,11 +60,29 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <TextView
+            android:id="@+id/text_content_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:text="This is where the About or FAQ text will appear." />
+
+    </FrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/events_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="453dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_height="374dp"
+        app:layout_anchor="@+id/frameLayout"
+        app:layout_anchorGravity="center"
         tools:listitem="@layout/item_event_club" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

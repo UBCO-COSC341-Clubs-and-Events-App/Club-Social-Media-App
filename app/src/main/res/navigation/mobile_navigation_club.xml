@@ -14,7 +14,11 @@
         android:id="@+id/eventsClubFragment"
         android:name="com.example.myapplication.ui.EventsClub.EventsClubFragment"
         android:label="fragment_events_club"
-        tools:layout="@layout/fragment_events_club" />
+        tools:layout="@layout/fragment_events_club">
+        <action
+            android:id="@+id/action_eventsClubFragment_to_createEventFragment"
+            app:destination="@id/createEventFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ticketSalesFragment"
         android:name="com.example.myapplication.ui.TicketSales.TicketSalesFragment"
@@ -25,4 +29,9 @@
         android:name="com.example.myapplication.ui.ClubPage.ClubPageFragment"
         android:label="fragment_club_page"
         tools:layout="@layout/fragment_club_page" />
+    <fragment
+        android:id="@+id/createEventFragment"
+        android:name="com.example.myapplication.ui.CreateEvent.CreateEventFragment"
+        android:label="fragment_create_event"
+        tools:layout="@layout/fragment_create_event" />
 </navigation>

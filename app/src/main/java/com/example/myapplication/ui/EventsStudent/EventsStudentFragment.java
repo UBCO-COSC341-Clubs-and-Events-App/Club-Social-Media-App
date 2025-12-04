@@ -29,7 +29,6 @@ public class EventsStudentFragment extends Fragment implements EventAdapter.OnFe
     private FragmentEventsStudentBinding binding;
     private EventAdapter eventAdapter;
     private EventsStudentViewModel eventsStudentViewModel;
-    // Store which mood is selected
     private String selectedMood = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -47,6 +46,8 @@ public class EventsStudentFragment extends Fragment implements EventAdapter.OnFe
         eventsStudentViewModel.getFilteredEvents().observe(getViewLifecycleOwner(), events -> {
             eventAdapter.setEvents(events);
         });
+
+        eventsStudentViewModel.filterEventsByDate(System.currentTimeMillis());
 
         return root;
     }
@@ -110,26 +111,19 @@ public class EventsStudentFragment extends Fragment implements EventAdapter.OnFe
         dialog.show();
     }
 
-    // Highlight logic
     private void selectEmoji(String mood, TextView emojiSad, TextView emojiNeutral, TextView emojiHappy) {
-
         selectedMood = mood;
-
-        // Reset all backgrounds
         emojiSad.setBackgroundColor(Color.TRANSPARENT);
         emojiNeutral.setBackgroundColor(Color.TRANSPARENT);
         emojiHappy.setBackgroundColor(Color.TRANSPARENT);
 
-        // Highlight the selected one
         switch (mood) {
             case "sad":
                 emojiSad.setBackgroundColor(Color.parseColor("#FFCDD2"));
                 break;
-
             case "neutral":
                 emojiNeutral.setBackgroundColor(Color.parseColor("#FFF9C4"));
                 break;
-
             case "happy":
                 emojiHappy.setBackgroundColor(Color.parseColor("#C8E6C9"));
                 break;
