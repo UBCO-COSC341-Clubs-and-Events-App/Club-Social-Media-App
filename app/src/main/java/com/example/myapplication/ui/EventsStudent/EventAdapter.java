@@ -62,6 +62,20 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             binding.eventTitleTextView.setText(event.getName());
             binding.eventLocationTextView.setText(event.getLocation());
             binding.feedbackButton.setOnClickListener(v -> listener.onFeedbackButtonClick(event));
+
+            // Get today's date
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+
+            // Check if the event's date is before today's date
+            if (event.getDate() < today.getTimeInMillis()) {
+                binding.feedbackButton.setVisibility(View.VISIBLE);
+            } else {
+                binding.feedbackButton.setVisibility(View.GONE);
+            }
         }
     }
 }
