@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -196,6 +198,11 @@ public class MainActivity extends AppCompatActivity {
     //----------Navigation Stuff----------
     private boolean handleDrawerSelection(@NonNull MenuItem item, @NonNull NavController navController) {
         Toast.makeText(this, item.getTitle() + " pressed", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.log_out) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MainActivity.this, Authentication.class));
+            finish();
+        }
         boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
         drawerLayout.closeDrawers();
         return handled;
