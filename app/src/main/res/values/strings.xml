@@ -36,4 +36,18 @@
     <string name="previous_month">Previous Month</string>
     <string name="next_month">Next Month</string>
     <string name="add_event">Add Event</string>
+
+    <!-- Ticket Details -->
+    <string name="details_label">Details</string>
+    <string name="details_body_text">This is a placeholder for the event details.</string>
+    <string name="past_event_ratings">Past Event Ratings</string>
+    <string name="ticket_types_title">Ticket Types</string>
+    <string name="choose_payment_type">Choose Payment Type</string>
+    <string name="total_including_tax">Total (including tax)</string>
+    <string name="total_price">$0.00</string>
+    <string name="get_tickets_button">Get Tickets</string>
+
+    <!-- Tickets Fragment -->
+    <string name="club_header_image">Club Header Image</string>
+
 </resources>

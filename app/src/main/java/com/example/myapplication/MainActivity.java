@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        navigationView.setNavigationItemSelectedListener(item -> handleDrawerSelection(item, navController));
         fab.setOnClickListener(view -> showBottomDialog());
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -83,13 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-    }
-
-    private boolean handleDrawerSelection(@NonNull MenuItem item, @NonNull NavController navController) {
-        Toast.makeText(this, item.getTitle() + " pressed", Toast.LENGTH_SHORT).show();
-        boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
-        drawerLayout.closeDrawers();
-        return handled;
     }
 
     private void configureNavigation(@NonNull NavController navController) {
