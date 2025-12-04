@@ -1,87 +1,87 @@
 package com.example.myapplication.ui.Tickets;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.myapplication.databinding.ItemTicketTypesBinding;
-import java.util.List;
-import java.util.Locale;
+import com.example.myapplication.R;
 
-public class TicketTypeAdapter extends RecyclerView.Adapter<TicketTypeAdapter.TicketTypeViewHolder> {
+import java.util.ArrayList;
 
-    private final List<TicketType> ticketTypes;
-    private final OnQuantityChangedListener listener;
+public class TicketTypeAdapter extends RecyclerView.Adapter<TicketTypeAdapter.ViewHolder> {
+
+    private final ArrayList<TicketType> ticketTypes;
+    private OnQuantityChangedListener onQuantityChangedListener;
 
     public interface OnQuantityChangedListener {
         void onQuantityChanged();
     }
 
-    public TicketTypeAdapter(List<TicketType> ticketTypes, OnQuantityChangedListener listener) {
+    public void setOnQuantityChangedListener(OnQuantityChangedListener listener) {
+        this.onQuantityChangedListener = listener;
+    }
+
+    public TicketTypeAdapter(ArrayList<TicketType> ticketTypes) {
         this.ticketTypes = ticketTypes;
-        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public TicketTypeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemTicketTypesBinding binding = ItemTicketTypesBinding.inflate(
-                LayoutInflater.from(parent.getContext()), parent, false);
-        return new TicketTypeViewHolder(binding);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ticket_types, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TicketTypeViewHolder holder, int position) {
-        holder.bind(ticketTypes.get(position));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        TicketType ticketType = ticketTypes.get(position);
+        holder.ticketName.setText(ticketType.getName());
+        holder.ticketPrice.setText(ticketType.getPrice());
+        holder.quantity.setText(String.valueOf(ticketType.getQuantity()));
+
+        holder.plusButton.setOnClickListener(v -> {
+            int newQuantity = ticketType.getQuantity() + 1;
+            ticketType.setQuantity(newQuantity);
+            notifyItemChanged(position);
+            if (onQuantityChangedListener != null) {
+                onQuantityChangedListener.onQuantityChanged();
+            }
+        });
+
+        holder.minusButton.setOnClickListener(v -> {
+            int newQuantity = ticketType.getQuantity() - 1;
+            if (newQuantity >= 0) {
+                ticketType.setQuantity(newQuantity);
+                notifyItemChanged(position);
+                if (onQuantityChangedListener != null) {
+                    onQuantityChangedListener.onQuantityChanged();
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return ticketTypes != null ? ticketTypes.size() : 0;
+        return ticketTypes.size();
     }
 
-    // Inner class ViewHolder to access adapter's members
-    public class TicketTypeViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView ticketName;
+        TextView ticketPrice;
+        TextView quantity;
+        ImageButton plusButton;
+        ImageButton minusButton;
 
-        private final ItemTicketTypesBinding binding;
-
-        public TicketTypeViewHolder(ItemTicketTypesBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-
-            // Set OnClickListener for increasing quantity
-            binding.btnPlus.setOnClickListener(v -> {
-                int pos = getBindingAdapterPosition();
-                if (pos != RecyclerView.NO_POSITION) {
-                    TicketType item = ticketTypes.get(pos);
-                    item.setQuantity(item.getQuantity() + 1);
-                    notifyItemChanged(pos);
-                    if (listener != null) listener.onQuantityChanged();
-                }
-            });
-
-            // Set OnClickListener for decreasing quantity
-            binding.btnMinus.setOnClickListener(v -> {
-                int pos = getBindingAdapterPosition();
-                if (pos != RecyclerView.NO_POSITION) {
-                    TicketType item = ticketTypes.get(pos);
-                    if (item.getQuantity() > 0) {
-                        item.setQuantity(item.getQuantity() - 1);
-                        notifyItemChanged(pos);
-                        if (listener != null) listener.onQuantityChanged();
-                    }
-                }
-            });
-        }
-
-        void bind(TicketType ticketType) {
-            binding.tvTicketTitle.setText(ticketType.getName());
-            binding.tvTicketPrice.setText(String.format(Locale.US, "$%.2f", ticketType.getPrice()));
-            binding.tvQuantity.setText(String.valueOf(ticketType.getQuantity()));
-
-            // Optional: visually disable minus button when quantity is 0
-            binding.btnMinus.setAlpha(ticketType.getQuantity() == 0 ? 0.3f : 1.0f);
-            binding.btnMinus.setEnabled(ticketType.getQuantity() > 0);
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            ticketName = itemView.findViewById(R.id.tv_ticket_title);
+            ticketPrice = itemView.findViewById(R.id.tv_ticket_price);
+            quantity = itemView.findViewById(R.id.tv_quantity);
+            plusButton = itemView.findViewById(R.id.btn_plus);
+            minusButton = itemView.findViewById(R.id.btn_minus);
         }
     }
 }

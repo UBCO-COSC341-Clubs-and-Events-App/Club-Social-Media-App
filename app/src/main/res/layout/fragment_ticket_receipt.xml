@@ -8,25 +8,6 @@
     android:background="@android:color/white"
     tools:context=".ui.Tickets.TicketReceiptFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#F5F5F5"
-        app:navigationIcon="@drawable/ic_menu_24"
-        app:menu="@menu/details_menu">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Receipt"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
-
-    </com.google.android.material.appbar.MaterialToolbar>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -117,15 +98,6 @@
                 android:text="Leave"
                 android:textColor="@android:color/white"
                 android:backgroundTint="#D32F2F"/>
-
-            <Button
-                android:id="@+id/tickets_club_page_button"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="8dp"
-                android:text="Tickets Club Page"
-                android:textColor="@android:color/white"
-                android:backgroundTint="#2196F3"/>
 
         </LinearLayout>
 

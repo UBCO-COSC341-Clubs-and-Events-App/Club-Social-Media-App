@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,9 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.FragmentTicketsBinding;
-import com.example.myapplication.ui.Tickets.Ticket;
-import com.example.myapplication.ui.Tickets.TicketAdapter;
-import com.example.myapplication.ui.Tickets.TicketsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,7 @@ public class TicketsFragment extends Fragment implements TicketAdapter.OnItemCli
 
     private FragmentTicketsBinding binding;
     private TicketAdapter adapter;
-    private List<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
     private TicketsViewModel ticketsViewModel;
 
     @Nullable
@@ -43,24 +41,27 @@ public class TicketsFragment extends Fragment implements TicketAdapter.OnItemCli
         setupRecyclerView();
 
         ticketsViewModel.getTickets().observe(getViewLifecycleOwner(), updatedTickets -> {
-            tickets.clear();
-            tickets.addAll(updatedTickets);
-            adapter.notifyDataSetChanged();
+            if (updatedTickets != null) {
+                tickets.clear();
+                tickets.addAll(updatedTickets);
+                adapter.notifyDataSetChanged();
+            }
         });
+
+        if (ticketsViewModel.getTickets().getValue() == null) {
+            ticketsViewModel.loadTickets();
+        }
 
         getParentFragmentManager().setFragmentResultListener("purchase_completed", getViewLifecycleOwner(), (requestKey, bundle) -> {
             String ticketId = bundle.getString("ticketId");
             if (ticketId != null) {
                 ticketsViewModel.markTicketAsBooked(ticketId);
+                Toast.makeText(getContext(), "You have successfully booked tickets for the event", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setupRecyclerView() {
-        tickets = new ArrayList<>();
-        if (ticketsViewModel.getTickets().getValue() == null) {
-            ticketsViewModel.loadTickets();
-        }
         binding.ticketsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new TicketAdapter(tickets, this);
         binding.ticketsRecyclerView.setAdapter(adapter);

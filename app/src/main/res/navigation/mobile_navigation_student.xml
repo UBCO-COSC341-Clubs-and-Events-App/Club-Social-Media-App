@@ -41,5 +41,9 @@
         android:id="@+id/ticketReceiptFragment"
         android:name="com.example.myapplication.ui.Tickets.TicketReceiptFragment"
         android:label="fragment_ticket_receipt"
-        tools:layout="@layout/fragment_ticket_receipt" />
+        tools:layout="@layout/fragment_ticket_receipt" >
+        <action
+            android:id="@+id/action_ticketReceiptFragment_to_ticketsFragment"
+            app:destination="@id/ticketsFragment" />
+    </fragment>
 </navigation>

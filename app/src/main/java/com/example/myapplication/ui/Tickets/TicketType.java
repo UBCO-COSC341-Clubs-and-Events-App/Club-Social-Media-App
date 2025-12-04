@@ -4,11 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class TicketType implements Parcelable {
-    private final String name;
-    private final double price;
+    private String name;
+    private String price;
     private int quantity;
 
-    public TicketType(String name, double price) {
+    public TicketType(String name, String price) {
         this.name = name;
         this.price = price;
         this.quantity = 0;
@@ -16,7 +16,7 @@ public class TicketType implements Parcelable {
 
     protected TicketType(Parcel in) {
         name = in.readString();
-        price = in.readDouble();
+        price = in.readString();
         quantity = in.readInt();
     }
 
@@ -36,7 +36,7 @@ public class TicketType implements Parcelable {
         return name;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -56,7 +56,7 @@ public class TicketType implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeDouble(price);
+        dest.writeString(price);
         dest.writeInt(quantity);
     }
 }
