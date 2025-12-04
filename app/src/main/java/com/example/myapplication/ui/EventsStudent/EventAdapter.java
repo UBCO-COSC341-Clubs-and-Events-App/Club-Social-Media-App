@@ -59,7 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         public void bind(Event event, OnFeedbackButtonClickListener listener) {
             binding.eventTimeTextView.setText(event.getTime());
             binding.eventDurationTextView.setText(event.getDuration());
-            binding.eventTitleTextView.setText(event.getTitle());
+            binding.eventTitleTextView.setText(event.getName());
             binding.eventLocationTextView.setText(event.getLocation());
             binding.feedbackButton.setOnClickListener(v -> listener.onFeedbackButtonClick(event));
         }
