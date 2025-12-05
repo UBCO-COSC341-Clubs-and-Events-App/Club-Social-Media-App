@@ -44,6 +44,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ItemViewHolder
         holder.binding.description.setText(item.getDescription());
         holder.binding.postImage.setImageResource(item.getPostImage());
         holder.binding.likeButton.setActivated(checkLiked());
+        holder.binding.eventDate.setText(item.getEventDate().toString());
 
         holder.binding.likeButton.setOnClickListener(view -> {
             int pos = holder.getBindingAdapterPosition();

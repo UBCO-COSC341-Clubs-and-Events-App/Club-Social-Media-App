@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,13 +27,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.myapplication.ui.EventsClub.Event;
 import com.example.myapplication.ui.Tickets.Ticket;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean isUser;
     private SearchView searchView;
     private ListView resultView;
-    //private ArrayAdapter<String> searchAdapter;
-    private java.util.List<String> allResults;
-    private java.util.List<String> filteredResults;
+    private ArrayList<Event> allResults;
+    private List<Event> filteredResults;
     private SearchResultAdapter searchAdapter;
+
+    private DatabaseReference databaseReference;
 
 
     @Override
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         isUser = getIntent().getBooleanExtra("is_user", true);
 
         bottomNavigationView = findViewById(R.id.bottom_nav);
-        fab = findViewById(R.id.fab);
+//        fab = findViewById(R.id.fab);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,21 +98,16 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         navigationView.setNavigationItemSelectedListener(item -> handleDrawerSelection(item, navController));
-        fab.setOnClickListener(view -> showBottomDialog());
+        //fab.setOnClickListener(view -> showBottomDialog());
 
         //----------Search Bar Stuff----------
         resultView.setVisibility(View.GONE);
 
-        allResults = java.util.Arrays.asList(
-                "Sample Event 123",
-                "Sample Event 456",
-                "Sample Event 789",
-                "Sample Event 147",
-                "Sample Event 569"
-        );
+        // FIX: Initialize allResults list
+        allResults = new ArrayList<>();
+        filteredResults = new ArrayList<>();
 
-        filteredResults = new java.util.ArrayList<>();
-
+        // FIX: The adapter now correctly uses a list of Event objects.
         searchAdapter = new SearchResultAdapter(
                 this,
                 filteredResults
@@ -116,11 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
         resultView.setAdapter(searchAdapter);
 
+        // FIX: The onItemClickListener now correctly gets an Event object.
         resultView.setOnItemClickListener((parent, view, position, id) -> {
-            String selected = filteredResults.get(position);
-            Toast.makeText(MainActivity.this, "Clicked: " + selected, Toast.LENGTH_SHORT).show();
+            Event selectedEvent = filteredResults.get(position);
+            Toast.makeText(MainActivity.this, "Clicked: " + selectedEvent.getName(), Toast.LENGTH_SHORT).show();
 
-            //Navigate to the event's page
+            // You can now navigate or perform an action with the selectedEvent object.
 
             searchView.setQuery("", false);
             searchView.clearFocus();
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             if (hasFocus) {
                 showSearchResults();
             } else {
-                hideSearchResults();
+                hideSearchResults(); // You might want to delay this to allow clicks on results
             }
         });
 
@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        // FIX: Call fetchEventsFromFirebase to populate the search data.
+        fetchEventsFromFirebase();
     }
 
     private void resetAndInitializeTicketsDatabase() {
@@ -169,13 +172,13 @@ public class MainActivity extends AppCompatActivity {
     private void showSearchResults() {
         resultView.setVisibility(View.VISIBLE);
         bottomNavigationView.setVisibility(View.GONE);
-        fab.setVisibility(View.GONE);
+        //fab.setVisibility(View.GONE);
     }
 
     private void hideSearchResults() {
         resultView.setVisibility(View.GONE);
         bottomNavigationView.setVisibility(View.VISIBLE);
-        fab.setVisibility(View.VISIBLE);
+       // fab.setVisibility(View.VISIBLE);
     }
 
     private void filterResults(String query) {
@@ -184,9 +187,11 @@ public class MainActivity extends AppCompatActivity {
         if (query != null) {
             String lower = query.toLowerCase().trim();
             if (!lower.isEmpty()) {
-                for (String item : allResults) {
-                    if (item.toLowerCase().contains(lower)) {
-                        filteredResults.add(item);
+                // Assuming allResults is now a list of Event objects
+                for (Event event : allResults) {
+                    // Make sure your Event object has a getName() method
+                    if (event.getName().toLowerCase().contains(lower)) {
+                        filteredResults.add(event);
                     }
                 }
             }
@@ -207,7 +212,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawers();
         return handled;
     }
-    //change
 
     private void configureNavigation(@NonNull NavController navController) {
         if (isUser) {
@@ -235,6 +239,34 @@ public class MainActivity extends AppCompatActivity {
                     R.id.clubPageFragment
             ).setOpenableLayout(drawerLayout).build();
         }
+    }
+
+    private void fetchEventsFromFirebase() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("events");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // FIX: Populate the allResults list, not filteredResults
+                allResults.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Event event = snapshot.getValue(Event.class);
+                    if (event != null) {
+                        allResults.add(event);
+                    }
+                }
+                // FIX: No longer need eventsAdapter here. If the search is active, we can re-filter.
+                // Re-filtering allows search results to update in real-time if the database changes.
+                if (searchView.hasFocus() && searchView.getQuery().length() > 0) {
+                    filterResults(searchView.getQuery().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // FIX: Use the correct context for the Toast
+                Toast.makeText(MainActivity.this, "Failed to load events.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showBottomDialog() {

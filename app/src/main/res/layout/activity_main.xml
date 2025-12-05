@@ -58,6 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:menu="@menu/bottom_nav_student" />
 
+        <!--
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -70,6 +71,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="40dp"
             app:tint="@color/lavender" />
+        -->
 
         <ListView
             android:id="@+id/searchResultsView"

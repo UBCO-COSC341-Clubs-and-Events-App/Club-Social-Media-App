@@ -52,12 +52,11 @@
             android:text="TextView"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/clubImage"
+            app:layout_constraintBottom_toTopOf="@+id/eventDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/clubImage"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
             android:id="@+id/likeButton"
@@ -95,11 +94,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:text="TextView"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clubImage" />
 
@@ -114,6 +114,16 @@
             app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintStart_toEndOf="@+id/likeButton"
             app:layout_constraintTop_toTopOf="@+id/likeButton" />
+
+        <TextView
+            android:id="@+id/eventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="TextView"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/clubImage"
+            app:layout_constraintStart_toStartOf="@+id/clubName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
