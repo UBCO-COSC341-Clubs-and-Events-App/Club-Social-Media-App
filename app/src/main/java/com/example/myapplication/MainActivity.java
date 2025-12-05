@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawers();
         return handled;
     }
+    //change
 
     private void configureNavigation(@NonNull NavController navController) {
         if (isUser) {
