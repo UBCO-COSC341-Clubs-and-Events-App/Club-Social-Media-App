@@ -3,24 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/postsFragment"
-            android:icon="@drawable/ic_baseline_upload_24"
-            android:title="Posts" />
-
+            android:id="@+id/members"
+            android:icon="@drawable/outline_groups_24"
+            android:title="Members" />
         <item
-            android:id="@+id/eventsClubFragment"
-            android:icon="@drawable/ic_baseline_subscriptions_24"
-            android:title="Events" />
-
+            android:id="@+id/messages"
+            android:icon="@drawable/outline_chat_bubble_24"
+            android:title="Messages" />
         <item
-            android:id="@+id/ticketSalesFragment"
-            android:icon="@drawable/ic_baseline_video_library_24"
-            android:title="Ticket Sales" />
-
+            android:id="@+id/settings"
+            android:icon="@drawable/outline_dashboard_2_gear_24"
+            android:title="Settings" />
         <item
-            android:id="@+id/clubPageFragment"
-            android:icon="@drawable/ic_baseline_vibration_24"
-            android:title="Club Page" />
+            android:id="@+id/log_out"
+            android:icon="@drawable/outline_exit_to_app_24"
+            android:title="Log out" />
     </group>
 
 </menu>
